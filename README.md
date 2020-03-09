@@ -1,6 +1,6 @@
 # Bash Script: magento backup rollback
 
-With this script you can create backup and make rollback of your Magento installation, either database or files. The script is based on Magerun.
+With this script you can create backup and make `automatically` rollback of your Magento installation, either database or files. The script is based on Magerun.
 
 
 ## Getting Started
@@ -32,11 +32,14 @@ Some default values are defined on the utility such as `backup location` and Mag
 ### Options
 The `backup.sh` script does not accept any options.
 
-The `rollback.sh` script accepts two options:
+The `rollback.sh` script accepts three options:
 
     -f : To specify the archived files version to be restored.
     
     -d : To specify the archived database version to be restored.
+    
+    -a : To restore automatically the last archived files and database version.
+    
 ## Examples
 ### To backup files and database into default location:
 `sudo bash  /srv/scripts/backup/backup.sh`
@@ -53,3 +56,5 @@ The `rollback.sh` script accepts two options:
 ### To restore both files and database :
 `sudo bash /srv/scripts/backup/rollback.sh -f /path/to/files-backup-2020-03-01-00-28.tar.gz -d /path/to/db-backup-2020-03-01-00-28.sql`
 
+### To restore automatically the last files and database :
+`sudo bash /srv/scripts/backup/rollback.sh -a`
