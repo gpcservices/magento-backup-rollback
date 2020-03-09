@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash  
 
-### sudo bash /srv/scripts/backup/rollback.sh
+### sudo bash /srv/scripts/backup/rollback.sh 
 
 MAGENTO_ROOT="/var/www/html/magento"
+BACKUP_PATH="${MAGENTO_ROOT}/var/backups"
 
 SYSTEM_USER="www-data"
 SYSTEM_GROUP="devbox"
@@ -13,14 +14,14 @@ MYSQL_DATABASE="magento"
 MYSQL_HOST="127.0.0.1"
 
 usage () {
-        echo "Usage: ${0} [-f files_backup_file_name] [-d database_backup_file_name]"
+        echo "Usage: ${0} [-f files_backup_file_name] [-d database_backup_file_name] {-a}"
 }
 
 checkarg () {
-if [[ $OPTARG =~ ^-[f/d/]$ ]]; then usage; exit 1; fi
+if [[ $OPTARG =~ ^-[f/d/a]$ ]]; then usage; exit 1; fi
 }
 
-while getopts ":f:d:" opt; do
+while getopts ":f:d:a" opt; do
   case $opt in
     f) checkarg
     FILES_BACKUP_FILE_NAME="$OPTARG"
@@ -28,13 +29,16 @@ while getopts ":f:d:" opt; do
     d) checkarg
     DATABASE_BACKUP_FILE_NAME="$OPTARG"
     ;;
+	a)
+	AUTO="true"
+	;;
     *) usage; exit 1
     ;;
   esac
 done
 
 ### Check whether at least one required parameter is defined
-       if [ -z ${FILES_BACKUP_FILE_NAME} ] && [ -z ${DATABASE_BACKUP_FILE_NAME} ]; then
+       if [ -z ${FILES_BACKUP_FILE_NAME} ] && [ -z ${DATABASE_BACKUP_FILE_NAME} ] && [ -z ${AUTO} ]; then
                usage; exit 1
        fi
 
@@ -43,7 +47,7 @@ done
 recovery_files () {
         echo "Recovery FILES from backup file ${FILES_BACKUP_FILE_NAME}..."
         echo ""
-        tar -xzf ${FILES_BACKUP_FILE_NAME} -C ${MAGENTO_ROOT}/
+        tar -xzf ${BACKUP_PATH}/${FILES_BACKUP_FILE_NAME} -C ${MAGENTO_ROOT}/
         RETURN_VALUE="$?"
 
              if [ "${RETURN_VALUE}" -ne "0" ] && [ "${RETURN_VALUE}" -ne "1" ]; then
@@ -66,7 +70,7 @@ recovery_database () {
         echo "Recovery DATABSE from backup file ${DATABASE_BACKUP_FILE_NAME}..."
         echo ""
 
-        /usr/local/bin/n98-magerun2 --skip-root-check --root-dir=${MAGENTO_ROOT} db:import ${DATABASE_BACKUP_FILE_NAME}
+        /usr/local/bin/n98-magerun2 --skip-root-check --root-dir=${MAGENTO_ROOT} db:import ${BACKUP_PATH}/${DATABASE_BACKUP_FILE_NAME}
         RETURN_VALUE="$?"
 
              if [ "${RETURN_VALUE}" -ne "0" ]; then
@@ -79,23 +83,39 @@ recovery_database () {
 
 }
 
+### Function to get the name of the latest created backup files
+get_newest_files () {
+
+   FILES_BACKUP_FILE_NAME=`ls -X ${BACKUP_PATH} | grep files-backup | tail -1`
+   DATABASE_BACKUP_FILE_NAME=`ls -X ${BACKUP_PATH} | grep db-backup | tail -1`
+
+}
+
 ### Enable maintenance mode
 echo "Enable maintenance mode..."
 /usr/local/bin/n98-magerun2 sys:maintenance --on --skip-root-check --root-dir=${MAGENTO_ROOT}
 
 
 ### Recovery files
-       if [ ! -z ${FILES_BACKUP_FILE_NAME} ] ; then
+       if [ ! -z ${FILES_BACKUP_FILE_NAME} ] && [ -z ${AUTO} ]; then
                echo ""
                recovery_files
        fi
 
 ### Recovery database
-       if [ ! -z ${DATABASE_BACKUP_FILE_NAME} ] ; then
+       if [ ! -z ${DATABASE_BACKUP_FILE_NAME} ] && [ -z ${AUTO} ]; then
                echo ""
                recovery_database
        fi
 
+### Auto recovery
+		if [ ! -z ${AUTO} ]; then 
+		    get_newest_files
+			recovery_files
+			echo ""
+			recovery_database
+		fi
+		
 ### Clean Magento Cache
        if  echo "Clean Magento Cache..."  ; then
           /usr/local/bin/n98-magerun2 cache:clean --skip-root-check --root-dir=${MAGENTO_ROOT}
@@ -107,3 +127,4 @@ echo "Enable maintenance mode..."
 echo "Disable maintenance mode..."
 /usr/local/bin/n98-magerun2 sys:maintenance --off --skip-root-check --root-dir=${MAGENTO_ROOT}
 echo ""
+
