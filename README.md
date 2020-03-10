@@ -1,7 +1,7 @@
 # Bash Script: magento backup rollback
 
 
-![Version 1.2.0](https://img.shields.io/badge/Version-1.2.0-green.svg)
+![Version 1.1.0](https://img.shields.io/badge/Version-1.1.0-green.svg)
 
 With this script you can create backup and make `automatically` rollback of your Magento installation, either database or files. The script is based on Magerun.
 
