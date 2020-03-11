@@ -61,3 +61,8 @@ The `rollback.sh` script accepts three options:
 
 ### To restore automatically the last files and database :
 `sudo bash /srv/scripts/backup/rollback.sh -a`
+
+
+## License
+
+Github Changelog Generator is released under the [MIT License](http://www.opensource.org/licenses/MIT).
