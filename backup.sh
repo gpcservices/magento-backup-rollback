@@ -5,7 +5,7 @@
 date="$(date "+%Y-%m-%d-%H-%M")"
 MAGENTO_ROOT="/var/www/html/magento"
 BACKUP_PATH="${MAGENTO_ROOT}/var/backups"
-AWS_BACKUP_DIR="aws-magento"
+AWS_BACKUP_DIR="aws-magento-backup"
 LOCAL_LIMIT_DAYS="+14"
 AWS_LIMIT_DAYS="90"
 
