@@ -37,7 +37,7 @@ Some default values are defined on the utility such as `backup location` and Mag
 
 `BACKUP_PATH`               default value is `/var/www/html/magento/var/backups`
 
-`AWS_BACKUP_DIR`            default value  is `aws-magento`
+`AWS_BACKUP_DIR`            default value  is `aws-magento-backup`
 
 `LOCAL_LIMIT_DAYS="+7"`     default value is `7` for `delete local backups older than 7 days`
 
