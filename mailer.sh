@@ -6,7 +6,7 @@ SENDER_MAIL="sender@example.com"
 TMP_MAIL_FILE="/tmp/mail1.txt"
 SES_USER_NAME="Base64EncodedSMTPUserName"
 SES_PASS="Base64EncodedSMTPPassword"
-SES_ENDPOINT="email-smtp.eu-central-1.amazonaws.com"
+SES_ENDPOINT="email-smtp.us-west-2.amazonaws.com"
 
 ### Preparing MAIL Header
 header () {
