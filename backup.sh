@@ -83,7 +83,7 @@ echo "Disable maintenance mode..."
 echo ""
 
 ### Delete backups older that 14 days from local
-echo "Deleting backups older ${LIMIT_DAYS} days from local server..."
+echo "Deleting backups older ${LOCAL_LIMIT_DAYS} days from local server..."
 find ${BACKUP_PATH} -type f \( -name "files-backup-*.tar.gz" -o -name "db-backup-*.sql" \) -mtime ${LOCAL_LIMIT_DAYS} -exec rm -rf {} \;
 RETURN_VALUE="$?"
 
