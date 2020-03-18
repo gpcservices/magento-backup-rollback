@@ -97,6 +97,7 @@ The `rollback.sh` script accepts three options:
 `sudo bash /srv/scripts/backup/rollback.sh -a`
 
 ### Schedule backup with cron
+SHELL=/bin/sh                                                                                       PATH=/usr/local:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 run backup at 3:00 am daily with email notification
 
 ` * 3 * * * /srv/scripts/backup.sh -e`
