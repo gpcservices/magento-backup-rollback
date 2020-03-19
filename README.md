@@ -96,8 +96,10 @@ The `rollback.sh` script accepts three options:
 ### To restore automatically the last files and database :
 `sudo bash /srv/scripts/backup/rollback.sh -a`
 
-### Schedule backup with cron
+### Schedule backup with crontab
 run backup at 3:00 am daily with email notification
+
+sudo crontab -e
 
 `SHELL=/bin/sh`  
 
