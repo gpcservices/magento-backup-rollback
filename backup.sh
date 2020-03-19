@@ -70,8 +70,8 @@ RETURN_VALUE="$?"
 
 ### Upload to s3
     if echo "Uploading to S3..."; then
-    aws s3 cp ${BACKUP_PATH}/files-backup-$date.tar.gz s3://${AWS_BACKUP_DIR}
-    aws s3 cp ${BACKUP_PATH}/db-backup-$date.sql s3://${AWS_BACKUP_DIR}
+    /usr/local/bin/aws s3 cp ${BACKUP_PATH}/files-backup-$date.tar.gz s3://${AWS_BACKUP_DIR}
+    /usr/local/bin/aws s3 cp ${BACKUP_PATH}/db-backup-$date.sql s3://${AWS_BACKUP_DIR}
     echo""
     echo "Done"
 
