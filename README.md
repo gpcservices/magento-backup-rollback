@@ -98,7 +98,7 @@ The `rollback.sh` script accepts three options:
 
 ### Schedule backup with crontab
 
-Configure aws for the user root
+Configure aws for the root user
 
 `aws configure`
 
