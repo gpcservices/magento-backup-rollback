@@ -103,7 +103,7 @@ sudo crontab -e
 
 `SHELL=/bin/sh`  
 
-`PATH=/usr/bin:/usr/local/bin`
+`PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`
 
 ` * 3 * * * /srv/scripts/backup.sh -e`
 
