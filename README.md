@@ -97,6 +97,9 @@ The `rollback.sh` script accepts three options:
 `sudo bash /srv/scripts/backup/rollback.sh -a`
 
 ### Schedule backup with crontab
+Configure AWS for the user root
+`aws configure`
+
 run backup at 3:00 am daily with email notification
 
 sudo crontab -e
