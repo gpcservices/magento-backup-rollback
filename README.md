@@ -101,7 +101,7 @@ run backup at 3:00 am daily with email notification
 
 `SHELL=/bin/sh`  
 
-`PATH=/usr/local:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin`
+`PATH=/usr/bin:/usr/local/bin`
 
 ` * 3 * * * /srv/scripts/backup.sh -e`
 
