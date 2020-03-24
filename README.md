@@ -110,7 +110,7 @@ sudo crontab -e
 
 `PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`
 
-` * 3 * * * /srv/scripts/backup/backup.sh -e`
+` 0 3 * * * /srv/scripts/backup/backup.sh -e`
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
