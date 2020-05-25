@@ -112,5 +112,9 @@ sudo crontab -e
 
 ` 0 3 * * * /srv/scripts/backup/backup.sh -e`
 
+Make the backup.sh executable
+
+`sudo chmod +x /srv/scripts/backup/backup.sh`
+
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
