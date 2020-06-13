@@ -21,7 +21,7 @@ These instructions will get you a copy of the tools up and running on your live 
 
 
 ```
-git clone https://github.com/quantiota/magento-backup-rollback 
+git clone https://github.com/gpcservices/magento-backup-rollback 
 mkdir /srv/scripts/backup
 cd magento-backup-rollback
 mv backup.sh rollback.sh mailer.sh  /srv/scripts/backup
